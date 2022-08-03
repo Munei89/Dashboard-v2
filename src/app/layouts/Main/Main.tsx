@@ -10,6 +10,7 @@ import Grid from '@mui/material/Grid';
 
 import { IMenuItem } from 'utils/constants';
 import KlashaLogo from 'app/assets/svgs/KlashaLogo';
+import Button from 'app/components/Button';
 
 import { StyledDrawer } from './styles';
 
@@ -24,24 +25,35 @@ const Main = ({ children, sidebarMenuItems }: Props) => {
       <StyledDrawer variant="permanent" open={true}>
         <Box
           sx={{
-            paddingBottom: '34px',
+            display: 'flex',
+            flexDirection: 'column',
           }}
         >
-          <KlashaLogo />
-        </Box>
-        {sidebarMenuItems.map(item => (
-          <List key={item.id}>
-            <ListItem>
-              <ListItemText primary={item.name} />
-            </ListItem>
-            {item.links.map(link => (
-              <ListItemButton key={link.id}>
-                <ListItemIcon>{link.icon}</ListItemIcon>
-                <ListItemText primary={link.name} />
-              </ListItemButton>
+          <Box
+            sx={{
+              paddingBottom: '34px',
+            }}
+          >
+            <KlashaLogo />
+
+            {sidebarMenuItems.map(item => (
+              <List key={item.id}>
+                <ListItem>
+                  <ListItemText primary={item.name} />
+                </ListItem>
+                {item.links.map(link => (
+                  <ListItemButton key={link.id}>
+                    <ListItemIcon>{link.icon}</ListItemIcon>
+                    <ListItemText primary={link.name} />
+                  </ListItemButton>
+                ))}
+              </List>
             ))}
-          </List>
-        ))}
+          </Box>
+          <Box>
+            <Button>Hide panel</Button>
+          </Box>
+        </Box>
       </StyledDrawer>
       <Box
         component="main"
