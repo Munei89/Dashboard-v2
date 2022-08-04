@@ -15,6 +15,7 @@ import { GlobalStyle } from 'styles/global-styles';
 import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './components/NotFoundPage/Loadable';
 import { useTranslation } from 'react-i18next';
+import { Transactions } from './pages/Transactions';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -22,14 +23,15 @@ export function App() {
     <BrowserRouter>
       <Helmet
         titleTemplate="%s - React Boilerplate"
-        defaultTitle="React Boilerplate"
+        defaultTitle="Klasha Dashboard"
         htmlAttributes={{ lang: i18n.language }}
       >
-        <meta name="description" content="A React Boilerplate application" />
+        <meta name="description" content="A Klasha Dashboard application" />
       </Helmet>
 
       <Switch>
         <Route exact path="/" component={HomePage} />
+        <Route exact path="/transactions" component={Transactions} />
         <Route component={NotFoundPage} />
       </Switch>
       <GlobalStyle />
