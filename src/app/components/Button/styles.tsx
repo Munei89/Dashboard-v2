@@ -10,6 +10,7 @@ export const StyledButton = styled(Button)<{
     font-weight: 400;
     font-size: 12px;
     padding: 12px 24px;
+  
     ${({ variant }) => {
       switch (variant) {
         case 'outlined':
@@ -32,10 +33,21 @@ export const StyledButton = styled(Button)<{
           return `
                     background-color: #000000;
                     color: #fff;
-                    border: 1px solid #008E8A;
+                    border: 1px solid #000000;
                     &:hover {
-                        background-color: #008E8A;
+                        background-color: #000000;
                         color: #fff;
+                        border: none;
+                    }
+                `;
+        case 'text':
+          return `
+                    background-color: transparent;
+                    color: #000;
+                    border: 0px;
+                    &:hover {
+                        background-color: transparent;
+                        color: #000;
                         border: none;
                     }
                 `;

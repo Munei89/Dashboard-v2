@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<StyledDrawer /> should render and match the snapshot 1`] = `
+<React.Suspense
+  fallback={null}
+>
+  <UNDEFINED />
+</React.Suspense>
+`;
+
+exports[`<SwitchButton /> should render and match the snapshot 1`] = `
+<React.Suspense
+  fallback={null}
+>
+  <UNDEFINED />
+</React.Suspense>
+`;

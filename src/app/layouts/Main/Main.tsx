@@ -1,6 +1,5 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import Container from '@mui/material/Container';
 import List from '@mui/material/List';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -13,6 +12,8 @@ import ArrowLeft from 'app/assets/svgs/ArrowLeft';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 
+import Header from 'app/components/Header';
+
 import { StyledDrawer, StyledMenuHeading, StyledMenuItem } from './styles';
 
 interface Props {
@@ -22,9 +23,11 @@ interface Props {
 
 const Main = ({ children, sidebarMenuItems }: Props) => {
   const [open, setOpen] = React.useState(false);
+
   const [isPanelHidden, setIsPanelHidden] = React.useState(false);
   const theme = useTheme();
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
+
   let drawerWidth;
 
   const handleDrawerOpen = () => {
@@ -38,11 +41,10 @@ const Main = ({ children, sidebarMenuItems }: Props) => {
   const hidePanel = () => {
     setIsPanelHidden(!isPanelHidden);
   };
-
   if (!isLg) {
     drawerWidth = 107;
   } else {
-    drawerWidth = 207;
+    drawerWidth = 280;
   }
 
   return (
@@ -57,6 +59,7 @@ const Main = ({ children, sidebarMenuItems }: Props) => {
         }}
         sx={{
           width: drawerWidth,
+          backgroundColor: '#fffbf7',
         }}
       >
         <Box
@@ -110,22 +113,24 @@ const Main = ({ children, sidebarMenuItems }: Props) => {
       <Box
         component="main"
         sx={{
-          backgroundColor: theme =>
-            theme.palette.mode === 'light'
-              ? theme.palette.grey[100]
-              : theme.palette.grey[900],
           flexGrow: 1,
           height: '100vh',
           overflow: 'auto',
         }}
       >
-        <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+        <Box
+          sx={{
+            padding: '48px 0px ',
+          }}
+        >
+          <Header />
+
           <Grid container spacing={3}>
             <Grid item xs={12}>
               {children}
             </Grid>
           </Grid>
-        </Container>
+        </Box>
       </Box>
     </Box>
   );
