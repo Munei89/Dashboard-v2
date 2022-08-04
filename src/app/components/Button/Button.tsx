@@ -3,7 +3,7 @@ import { StyledButton } from './styles';
 
 interface Props {
   children: React.ReactNode;
-  rest?: any;
+  [x: string]: any;
 }
 
 const Button = ({ children, ...rest }: Props) => {

@@ -11,7 +11,7 @@ export function HomePage() {
         <meta name="description" content="A Boilerplate application homepage" />
       </Helmet>
       <Main sidebarMenuItems={menuItems}>
-        <span>My HomePage</span>
+        <span>My HomePages</span>
       </Main>
     </>
   );

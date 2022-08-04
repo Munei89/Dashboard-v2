@@ -2,17 +2,18 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import Container from '@mui/material/Container';
 import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemButton from '@mui/material/ListItemButton';
 import Grid from '@mui/material/Grid';
 
 import { IMenuItem } from 'utils/constants';
 import KlashaLogo from 'app/assets/svgs/KlashaLogo';
 import Button from 'app/components/Button';
+import ArrowLeft from 'app/assets/svgs/ArrowLeft';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
-import { StyledDrawer } from './styles';
+import { StyledDrawer, StyledMenuHeading, StyledMenuItem } from './styles';
 
 interface Props {
   children: React.ReactNode;
@@ -20,38 +21,89 @@ interface Props {
 }
 
 const Main = ({ children, sidebarMenuItems }: Props) => {
+  const [open, setOpen] = React.useState(false);
+  const [isPanelHidden, setIsPanelHidden] = React.useState(false);
+  const theme = useTheme();
+  const isLg = useMediaQuery(theme.breakpoints.up('lg'));
+  let drawerWidth;
+
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+
+  const hidePanel = () => {
+    setIsPanelHidden(!isPanelHidden);
+  };
+
+  if (!isLg) {
+    drawerWidth = 107;
+  } else {
+    drawerWidth = 207;
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
-      <StyledDrawer variant="permanent" open={true}>
+      <StyledDrawer
+        variant={isLg ? 'permanent' : 'temporary'}
+        $panel={isPanelHidden}
+        open={true}
+        anchor="left"
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          width: drawerWidth,
+        }}
+      >
         <Box
           sx={{
             display: 'flex',
             flexDirection: 'column',
           }}
         >
-          <Box
-            sx={{
-              paddingBottom: '34px',
-            }}
-          >
-            <KlashaLogo />
+          <Box>
+            <Box
+              sx={{
+                paddingBottom: '34px',
+              }}
+            >
+              <KlashaLogo />
+            </Box>
 
             {sidebarMenuItems.map(item => (
               <List key={item.id}>
-                <ListItem>
+                <StyledMenuHeading>
                   <ListItemText primary={item.name} />
-                </ListItem>
+                </StyledMenuHeading>
                 {item.links.map(link => (
-                  <ListItemButton key={link.id}>
+                  <StyledMenuItem
+                    key={link.id}
+                    disableTouchRipple
+                    disableRipple
+                  >
                     <ListItemIcon>{link.icon}</ListItemIcon>
                     <ListItemText primary={link.name} />
-                  </ListItemButton>
+                  </StyledMenuItem>
                 ))}
               </List>
             ))}
           </Box>
-          <Box>
-            <Button>Hide panel</Button>
+          <Box
+            sx={{
+              paddingTop: '40px',
+            }}
+          >
+            <Button
+              onClick={hidePanel}
+              variant="outlined"
+              startIcon={<ArrowLeft />}
+            >
+              Hide panel
+            </Button>
           </Box>
         </Box>
       </StyledDrawer>
