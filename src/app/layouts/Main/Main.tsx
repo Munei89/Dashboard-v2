@@ -93,7 +93,7 @@ const Main = ({ children, drawerOpen }: Props) => {
         {
           id: 2,
           name: `${t(messages.balances())}`,
-          url: '#',
+          url: '#balances',
           icon: <Walllet />,
         },
         {
@@ -105,19 +105,19 @@ const Main = ({ children, drawerOpen }: Props) => {
         {
           id: 4,
           name: `${t(messages.analytics())}`,
-          url: '/',
+          url: '#analytics',
           icon: <Chart />,
         },
         {
           id: 5,
           name: `${t(messages.marketing())}`,
-          url: '/',
+          url: '#marketing',
           icon: <Radar />,
         },
         {
           id: 6,
           name: `${t(messages.exchangeRate())}`,
-          url: '/exchange-rates',
+          url: '#exchange-rates',
           icon: <Exchange />,
         },
       ],
@@ -129,13 +129,13 @@ const Main = ({ children, drawerOpen }: Props) => {
         {
           id: 1,
           name: `${t(messages.klashaCheckout())}`,
-          url: '/',
+          url: '#checkout',
           icon: <ShoppingCart />,
         },
         {
           id: 2,
           name: `${t(messages.paymentLinks())}`,
-          url: '/',
+          url: '#payment-links',
           icon: <PaymentLink />,
         },
       ],
@@ -147,7 +147,7 @@ const Main = ({ children, drawerOpen }: Props) => {
         {
           id: 1,
           name: `${t(messages.klashaWire())}`,
-          url: '/',
+          url: '#klasha-wire',
           icon: <Transactions />,
         },
       ],
