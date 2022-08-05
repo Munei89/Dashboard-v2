@@ -222,6 +222,11 @@ const Main = ({ children, drawerOpen }: Props) => {
                   : dispatch(actions.setDrawerOpen())
               }
               variant="outlined"
+              sx={{
+                marginBottom: {
+                  xs: '32px',
+                },
+              }}
               startIcon={<ArrowLeft />}
             >
               Hide panel
