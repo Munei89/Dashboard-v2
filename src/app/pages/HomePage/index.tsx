@@ -142,7 +142,11 @@ export function HomePage() {
                   <Button
                     variant="outlined"
                     endIcon={<ArrowDown />}
-                    sx={{ margin: ['0 8px', '0 16px'], width: { xs: '100%' } }}
+                    sx={{
+                      margin: ['0 8px', '0 16px'],
+                      width: { xs: '100%' },
+                      height: '51px',
+                    }}
                   >
                     USD
                   </Button>
@@ -182,7 +186,7 @@ export function HomePage() {
                   height: '284px',
                   backgroundColor: '#EF2C5A',
                   color: '#fff',
-                  border: '2px solid #EF2C5A !important',
+                  border: '1px solid #EF2C5A !important',
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
