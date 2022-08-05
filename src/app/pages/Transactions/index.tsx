@@ -6,8 +6,9 @@ import ContentRow from 'app/components/ContentRow';
 import { Grid, Box } from '@mui/material';
 import TransactionTable from 'app/components/Table/Table';
 import Button from 'app/components/Button';
-import TextField from '@mui/material/TextField';
+import Input from 'app/components/Input';
 import Search from 'app/assets/svgs/Search';
+import Filter from 'app/assets/svgs/Filter';
 
 import {
   StyledTableContainer,
@@ -32,8 +33,8 @@ export function Transactions() {
                 </StyledTableHeader>
                 <StyledTableActions>
                   <Box>
-                    <TextField
-                      id="outlined-basic"
+                    <Input
+                      id="search-input"
                       variant="outlined"
                       placeholder="Search"
                       InputProps={{
@@ -42,8 +43,17 @@ export function Transactions() {
                     />
                   </Box>
                   <Box>
-                    <Button>Export</Button>
-                    <Button>Filter</Button>
+                    <Button
+                      variant="outlined"
+                      size="small"
+                      sx={{ marginRight: '16px' }}
+                      endIcon={<Filter />}
+                    >
+                      Filter
+                    </Button>
+                    <Button size="small" variant="outlined">
+                      Export
+                    </Button>
                   </Box>
                 </StyledTableActions>
                 <TransactionTable />

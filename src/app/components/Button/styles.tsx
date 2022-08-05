@@ -3,13 +3,14 @@ import styled from 'styled-components/macro';
 
 export const StyledButton = styled(Button)<{
   variant?: string;
+  size?: string;
   buttontype?: string;
 }>`
   &.MuiButton-root {
     border-radius: 6px;
     font-weight: 400;
     font-size: 12px;
-    padding: 12px 24px;
+
   
     ${({ variant }) => {
       switch (variant) {
@@ -58,4 +59,16 @@ export const StyledButton = styled(Button)<{
                 `;
       }
     }}
+     ${({ size }) => {
+       switch (size) {
+         case 'small':
+           return `
+             padding: 6px 10px;
+                `;
+         default:
+           return `
+            padding: 12px 24px;
+          `;
+       }
+     }}
 `;

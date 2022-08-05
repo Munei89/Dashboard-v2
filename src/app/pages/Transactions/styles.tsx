@@ -10,19 +10,16 @@ export const StyledTableContainer = styled(Box)`
 
 export const StyledTableHeader = styled(Box)`
   border-bottom: 1px solid #f0f0f0;
+  padding: 16px;
 
   h2 {
     font-style: normal;
     font-weight: 500;
     font-size: 19px;
     line-height: 23px;
-    /* identical to box height, or 121% */
-
     letter-spacing: -0.02em;
-
-    /* base/black */
-
     color: #000000;
+    margin: 0;
   }
 `;
 
@@ -30,4 +27,6 @@ export const StyledTableActions = styled(Box)`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
 `;
