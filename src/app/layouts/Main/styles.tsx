@@ -83,7 +83,7 @@ export const StyledMenuItem = styled(ListItemButton)<{ $active: boolean }>`
 
 export const StyledHeader = styled(Grid)`
   &.MuiGrid-root {
-    border-bottom: 1px solid red;
+    border-bottom: 1px solid #f1f1f1;
     padding-bottom: 16px;
     padding-left: 32px;
     padding-right: 32px;
