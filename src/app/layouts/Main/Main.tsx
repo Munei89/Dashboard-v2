@@ -16,8 +16,7 @@ import Header from 'app/components/Header';
 import { StyledDrawer, StyledMenuHeading, StyledMenuItem } from './styles';
 import { useInjectReducer } from 'utils/redux-injectors';
 import { actions, reducer, sliceKey } from 'app/pages/slice';
-import selectAppState from 'app/pages/selectors';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import PieChart from 'app/assets/svgs/PieChart';
@@ -31,7 +30,6 @@ import PaymentLink from 'app/assets/svgs/PaymentLink';
 import Transactions from 'app/assets/svgs/Transactions';
 
 import { useTranslation } from 'react-i18next';
-import { _t } from 'utils/messages';
 import { messages } from 'app/pages/HomePage/messeges';
 
 interface Props {

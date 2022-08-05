@@ -27,7 +27,6 @@ import { actions, reducer, sliceKey } from 'app/pages/slice';
 import { selectAppState } from 'app/pages/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { _t } from 'utils/messages';
 import { messages } from './messeges';
 
 export function HomePage() {

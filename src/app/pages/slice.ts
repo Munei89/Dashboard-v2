@@ -4,7 +4,7 @@ import { IAppState } from './types';
 
 export const initialState: IAppState = {
   language: 'en',
-  currency: 'USD',
+  currency: '₦',
   isDrawerOpen: false,
 };
 

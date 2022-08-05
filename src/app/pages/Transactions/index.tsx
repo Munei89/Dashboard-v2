@@ -15,7 +15,6 @@ import { actions, reducer, sliceKey } from 'app/pages/slice';
 import { selectAppState } from 'app/pages/selectors';
 import { useSelector, useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { _t } from 'utils/messages';
 import { messages } from '../HomePage/messeges';
 
 import {
@@ -31,7 +30,7 @@ export function Transactions() {
   useInjectReducer({ key: sliceKey, reducer: reducer });
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  const { currency, isDrawerOpen } = useSelector(selectAppState);
+  const { isDrawerOpen } = useSelector(selectAppState);
   return (
     <>
       <Helmet>
