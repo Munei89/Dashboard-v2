@@ -23,7 +23,7 @@ export const StyledSwitchButton = styled(Switch)`
   }
   .MuiSwitch-thumb {
     margin-top: -7px;
-    margin-left: -3px;
+    margin-left: -5px;
   }
   .Mui-checked {
     color: #ef2c5a;
@@ -47,5 +47,10 @@ export const StyledSwitchWrapper = styled.div`
   }
   div {
     flex-grow: 1;
+  }
+  @media (max-width: 1280px) {
+    position: relative;
+    top: -5px;
+    right: 20px;
   }
 `;

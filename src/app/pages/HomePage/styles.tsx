@@ -2,7 +2,7 @@ import styled from 'styled-components/macro';
 import { Grid } from '@mui/material';
 
 export const StyledCardHeading = styled.h4`
-  font-family: 'Inter Regular', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -14,7 +14,7 @@ export const StyledCardHeading = styled.h4`
 `;
 
 export const StyledCardHeadingWhite = styled.h4`
-  font-family: 'Inter Regular', sans-serif;
+  font-family: 'Inter', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -76,6 +76,9 @@ export const StyledGraphIndicators = styled.div`
   line-height: 22px;
   color: #ef2c5a;
   margin: 0 16px;
+  @media (max-width: 767px) {
+    margin: 0 8px;
+  }
 `;
 
 export const StyledCardText = styled.p`

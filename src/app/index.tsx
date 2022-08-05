@@ -8,7 +8,7 @@
 
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
-import { Switch, Route, BrowserRouter } from 'react-router-dom';
+import { Routes, Route, BrowserRouter } from 'react-router-dom';
 
 import { GlobalStyle } from 'styles/global-styles';
 
@@ -29,11 +29,11 @@ export function App() {
         <meta name="description" content="A Klasha Dashboard application" />
       </Helmet>
 
-      <Switch>
-        <Route exact path="/" component={HomePage} />
-        <Route exact path="/transactions" component={Transactions} />
-        <Route component={NotFoundPage} />
-      </Switch>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/transactions" element={<Transactions />} />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
       <GlobalStyle />
     </BrowserRouter>
   );

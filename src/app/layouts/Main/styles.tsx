@@ -5,11 +5,29 @@ import ListItemButton from '@mui/material/ListItemButton';
 import Grid from '@mui/material/Grid';
 import Menu from '@mui/material/Menu';
 
-export const StyledDrawer = styled(Drawer)<{ $panel: boolean }>`
+export const StyledDrawer = styled(Drawer)<{ open: boolean; $islg: boolean }>`
+  &.MuiDrawer-docked {
+    -webkit-transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    -moz-transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    -o-transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    width: ${({ open }) => (open ? '280px' : '0')};
+    visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
+    position: ${({ $islg }) => ($islg ? 'relative' : 'fixed')};
+    z-index: 99;
+  }
+
   .MuiDrawer-paper {
     padding: 48px 0 0 48px;
     background: #fffbf7;
     border: 0px;
+    -webkit-transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    -moz-transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    -o-transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    transition: width 225ms cubic-bezier(0.4, 0, 0.6, 1) 0ms;
+    width: ${({ open }) => (open ? '280px' : '0')};
+    visibility: ${({ open }) => (open ? 'visible' : 'hidden')};
+    position: ${({ $islg }) => ($islg ? 'relative' : 'fixed')};
 
     .MuiList-root {
       padding-top: 0;
@@ -38,12 +56,17 @@ export const StyledMenuHeading = styled(ListItem)`
   }
 `;
 
-export const StyledMenuItem = styled(ListItemButton)`
+export const StyledMenuItem = styled(ListItemButton)<{ $active: boolean }>`
   &.MuiListItemButton-root {
     font-weight: 400;
     font-size: 16px;
     line-height: 24px;
-    color: #000000;
+    color: ${({ $active }) => ($active ? '#ef2c5a' : '#000')};
+    svg {
+      path {
+        stroke: ${({ $active }) => ($active ? '#ef2c5a' : '#000')};
+      }
+    }
 
     &:hover {
       color: #ef2c5a;

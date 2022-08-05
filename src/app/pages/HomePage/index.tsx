@@ -13,7 +13,6 @@ import {
   StyledCardHeadingWhite,
   StyledSvgWrapper,
   StyledGraphHeading,
-  StyledGraphIndicators,
   StyledCardText,
   StyledSaleGridHeader,
 } from './styles';
@@ -23,29 +22,46 @@ import Button from 'app/components/Button';
 import ArrowDown from 'app/assets/svgs/ArrowDown';
 import ArrowDownAlt from 'app/assets/svgs/ArrowDownAlt';
 import Lines from 'app/assets/images/lines.png';
+import { useInjectReducer } from 'utils/redux-injectors';
+import { actions, reducer, sliceKey } from 'app/pages/slice';
+import { selectAppState } from 'app/pages/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
+import { _t } from 'utils/messages';
+import { messages } from './messeges';
 
 export function HomePage() {
-  const currency = '₦';
+  useInjectReducer({ key: sliceKey, reducer: reducer });
+  const dispatch = useDispatch();
+  const { currency, isDrawerOpen } = useSelector(selectAppState);
+  const { t } = useTranslation();
+
   return (
     <>
       <Helmet>
         <title>HomePage</title>
         <meta name="description" content="A Boilerplate application homepage" />
       </Helmet>
-      <Main sidebarMenuItems={menuItems}>
-        <ContentRow contentHeader={<h2>Sales overview</h2>}>
+      <Main
+        sidebarMenuItems={menuItems}
+        drawerOpen={isDrawerOpen}
+        onCloseDrawer={() => dispatch(actions.setDrawerOpen())}
+      >
+        <ContentRow contentHeader={<h2>{t(messages.salesOverview())}</h2>}>
           <Grid container spacing={4}>
-            <Grid item xs={12} md={6} lg={3}>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
               <StyledCard
                 sx={{
                   height: '240px',
                 }}
               >
-                <StyledCardHeading>Today's sales</StyledCardHeading>
+                <StyledCardHeading>
+                  {t(messages.todaysSales())}
+                </StyledCardHeading>
                 <StyledAmount>{currency}1,652.50</StyledAmount>
               </StyledCard>
             </Grid>
-            <Grid item xs={12} md={6} lg={3}>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
               <StyledCard
                 sx={{
                   height: '240px',
@@ -59,11 +75,13 @@ export function HomePage() {
                 <StyledSvgWrapper>
                   <Graph />
                 </StyledSvgWrapper>
-                <StyledCardHeadingWhite>Today's sales</StyledCardHeadingWhite>
+                <StyledCardHeadingWhite>
+                  {t(messages.thisWeek())}
+                </StyledCardHeadingWhite>
                 <StyledAmountWhite>{currency}1,652.50</StyledAmountWhite>
               </StyledCard>
             </Grid>
-            <Grid item xs={12} md={6} lg={3}>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
               <StyledCard
                 sx={{
                   height: '240px',
@@ -73,11 +91,11 @@ export function HomePage() {
                 <StyledSvgWrapper>
                   <GraphLite />
                 </StyledSvgWrapper>
-                <StyledCardHeading>This month</StyledCardHeading>
+                <StyledCardHeading>{t(messages.thisMonth())}</StyledCardHeading>
                 <StyledAmount>{currency}1,652.50</StyledAmount>
               </StyledCard>
             </Grid>
-            <Grid item xs={12} md={6} lg={3}>
+            <Grid item xs={12} sm={6} md={6} lg={3}>
               <StyledCard
                 sx={{
                   height: '240px',
@@ -87,7 +105,7 @@ export function HomePage() {
                 <StyledSvgWrapper>
                   <GraphLite />
                 </StyledSvgWrapper>
-                <StyledCardHeading>Last month</StyledCardHeading>
+                <StyledCardHeading>{t(messages.lastMonth())}</StyledCardHeading>
                 <StyledAmount>{currency}1,652.50</StyledAmount>
               </StyledCard>
             </Grid>
@@ -105,33 +123,44 @@ export function HomePage() {
             >
               <StyledSaleGridHeader
                 item
-                xs={8}
+                xs={12}
+                sm={12}
                 lg={8}
                 sx={{
                   display: 'flex',
                   justifyContent: 'space-between',
+                  flexDirection: ['column', 'row'],
                 }}
               >
                 <Box
                   sx={{
                     display: 'flex',
                     alignItems: 'baseline',
+                    flexDirection: ['row', 'row'],
                   }}
                 >
-                  <StyledGraphHeading>Sales</StyledGraphHeading>
-                  <StyledGraphIndicators> 7 Days</StyledGraphIndicators>
-                  <StyledGraphIndicators>30 Days</StyledGraphIndicators>
+                  <StyledGraphHeading>{t(messages.sales())}</StyledGraphHeading>
                   <Button
                     variant="outlined"
                     endIcon={<ArrowDown />}
-                    sx={{ margin: '0 16px' }}
+                    sx={{ margin: ['0 8px', '0 16px'], width: { xs: '100%' } }}
                   >
                     USD
                   </Button>
                 </Box>
-                <Box>
-                  <Button variant="outlined" startIcon={<ArrowDownAlt />}>
-                    Download report
+                <Box
+                  sx={{
+                    marginTop: ['16px', '0'],
+                  }}
+                >
+                  <Button
+                    sx={{
+                      width: { xs: '100%' },
+                    }}
+                    variant="outlined"
+                    startIcon={<ArrowDownAlt />}
+                  >
+                    {t(messages.downloadReport())}
                   </Button>
                 </Box>
               </StyledSaleGridHeader>
@@ -161,12 +190,10 @@ export function HomePage() {
                   backgroundImage: `url(${Lines})`,
                 }}
               >
-                <StyledCardText>
-                  KlashaWire - send money to businesses globally from Africa
-                </StyledCardText>
+                <StyledCardText>{t(messages.klashaText())}</StyledCardText>
                 <Box>
                   <Button size="xs" variant="contained">
-                    Send a wire
+                    {t(messages.sendAWire())}
                   </Button>
                 </Box>
               </StyledCard>

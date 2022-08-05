@@ -22,8 +22,8 @@ export const GraphLite = () => {
           y2="77"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color="#EF2C5A" />
-          <stop offset="1" stop-color="#EF2C5A" stop-opacity="0" />
+          <stop stopColor="#EF2C5A" />
+          <stop offset="1" stopColor="#EF2C5A" stopOpacity="0" />
         </linearGradient>
       </defs>
     </svg>

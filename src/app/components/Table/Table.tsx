@@ -5,7 +5,10 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { StyledTable } from './styles';
+import { useTranslation } from 'react-i18next';
+import { _t } from 'utils/messages';
+import { messages } from 'app/pages/HomePage/messeges';
 
 function createData(
   transactionId: string,
@@ -76,39 +79,95 @@ const rows = [
 ];
 
 const TransactionTable = () => {
+  const { t } = useTranslation();
   return (
     <TableContainer>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+      <StyledTable sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Transaction ID</TableCell>
-            <TableCell align="right">Source</TableCell>
-            <TableCell align="right">Customer name</TableCell>
-            <TableCell align="right">Customer email</TableCell>
-            <TableCell align="right">Amount</TableCell>
-            <TableCell align="right">Request date</TableCell>
-            <TableCell align="right">Status</TableCell>
+            <TableCell>{t(messages.transactionId())}</TableCell>
+            <TableCell align="left">
+              {t(messages.transactionSource())}
+            </TableCell>
+            <TableCell align="left">{t(messages.customerName())}</TableCell>
+            <TableCell align="left">{t(messages.customerEmail())}</TableCell>
+            <TableCell align="left">{t(messages.amount())}</TableCell>
+            <TableCell align="left">{t(messages.requestDate())}</TableCell>
+            <TableCell align="left">{t(messages.status())}</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {rows.map((row, i) => (
-            <TableRow
-              key={i}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.transactionId}
-              </TableCell>
-              <TableCell align="right">{row.source}</TableCell>
-              <TableCell align="right">{row.customerName}</TableCell>
-              <TableCell align="right">{row.customerEmail}</TableCell>
-              <TableCell align="right">{row.amount}</TableCell>
-              <TableCell align="right">{row.requestDate}</TableCell>
-              <TableCell align="right">{row.status}</TableCell>
-            </TableRow>
-          ))}
+          {rows.map((row, i) => {
+            const isSuccessful = row.status === 'Successful';
+            return (
+              <TableRow
+                key={i}
+                sx={{
+                  '&:last-child td, &:last-child th': { border: 0 },
+                  backgroundColor: isSuccessful ? '#FAFAFA' : '#fff',
+                }}
+              >
+                <TableCell
+                  sx={{
+                    borderBottom: isSuccessful ? '0' : '1px solid #F0F0F0;',
+                  }}
+                  scope="row"
+                >
+                  {row.transactionId}
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{
+                    borderBottom: isSuccessful ? '0' : '1px solid #F0F0F0;',
+                  }}
+                >
+                  {row.source}
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{
+                    borderBottom: isSuccessful ? '0' : '1px solid #F0F0F0;',
+                  }}
+                >
+                  {row.customerName}
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{
+                    borderBottom: isSuccessful ? '0' : '1px solid #F0F0F0;',
+                  }}
+                >
+                  {row.customerEmail}
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{
+                    borderBottom: isSuccessful ? '0' : '1px solid #F0F0F0;',
+                  }}
+                >
+                  {row.amount}
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{
+                    borderBottom: isSuccessful ? '0' : '1px solid #F0F0F0;',
+                  }}
+                >
+                  {row.requestDate}
+                </TableCell>
+                <TableCell
+                  align="left"
+                  sx={{
+                    borderBottom: isSuccessful ? '0' : '1px solid #F0F0F0;',
+                  }}
+                >
+                  {row.status}
+                </TableCell>
+              </TableRow>
+            );
+          })}
         </TableBody>
-      </Table>
+      </StyledTable>
     </TableContainer>
   );
 };

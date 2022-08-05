@@ -31,7 +31,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'GeneralSans-Extralight', Helvetica, Arial, sans-serif;
+    font-family: GeneralSans-Extralight, Helvetica, Arial, sans-serif;
   }
 
   #root {

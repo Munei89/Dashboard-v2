@@ -4,23 +4,31 @@ import ArrowDown from 'app/assets/svgs/ArrowDown';
 import MenuItem from '@mui/material/MenuItem';
 import moment from 'moment';
 
-import { StyledHeader, StyledProfileMenu } from './styles';
+import {
+  StyledHeader,
+  StyledProfileMenu,
+  StyledDate,
+  StyledProfileWrapper,
+} from './styles';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Button from '../Button/Button';
+import Menu from 'app/assets/svgs/Menu';
+import { useInjectReducer } from 'utils/redux-injectors';
+import { actions, reducer, sliceKey } from 'app/pages/slice';
+import { useDispatch } from 'react-redux';
+import { LanguageSwitch } from 'app/components/LanguageSwitch';
 
-const Header = () => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const isProfileMenuOpen = Boolean(anchorEl);
+interface Props {
+  isMenuOpen: boolean;
+}
+
+const Header = ({ isMenuOpen }: Props) => {
+  useInjectReducer({ key: sliceKey, reducer: reducer });
+
+  const dispatch = useDispatch();
 
   const day = moment().format('LL');
-
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
-  const handleOpen = event => {
-    setAnchorEl(event.currentTarget);
-  };
 
   return (
     <Grid container spacing={1} sx={{ marginBottom: '80px' }}>
@@ -32,15 +40,34 @@ const Header = () => {
         item
         xs={12}
       >
-        <div>Today: {day}</div>
-        <Box>
+        <Box
+          sx={{
+            display: 'flex',
+          }}
+        >
+          {' '}
+          {!isMenuOpen && (
+            <Box
+              sx={{
+                position: 'relative',
+                marginRight: '16px',
+              }}
+              onClick={() => dispatch(actions.setDrawerOpen())}
+            >
+              <Menu />
+            </Box>
+          )}
+          <StyledDate>Today: {day}</StyledDate>
+        </Box>
+        <StyledProfileWrapper
+          sx={{
+            xs: { display: 'flex', textAlign: 'right' },
+            md: { display: 'flex', textAlign: 'right' },
+          }}
+        >
           <SwitchButton>Live</SwitchButton>
           <Button
             id="basic-button"
-            aria-controls={isProfileMenuOpen ? 'basic-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={isProfileMenuOpen ? 'true' : undefined}
-            onClick={handleOpen}
             variant="text"
             sx={{
               marginTop: '-16px',
@@ -52,57 +79,8 @@ const Header = () => {
           >
             Welcome back, Ada
           </Button>
-
-          <StyledProfileMenu
-            id="basic-menu"
-            anchorEl={anchorEl}
-            open={isProfileMenuOpen}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'basic-button',
-            }}
-            sx={{
-              boxShadow: '0px',
-            }}
-          >
-            <MenuItem onClick={handleClose}>Profile</MenuItem>
-            <MenuItem onClick={handleClose}>My account</MenuItem>
-            <MenuItem onClick={handleClose}>Logout</MenuItem>
-          </StyledProfileMenu>
-          <Button
-            id="lang-button"
-            aria-controls={isProfileMenuOpen ? 'lang-menu' : undefined}
-            aria-haspopup="true"
-            aria-expanded={isProfileMenuOpen ? 'true' : undefined}
-            onClick={handleOpen}
-            variant="text"
-            sx={{
-              marginTop: '-16px',
-              fontSize: '14px',
-            }}
-            disableTouchRipple
-            disableRipple
-            endIcon={<ArrowDown />}
-          >
-            EN
-          </Button>
-
-          <StyledProfileMenu
-            id="lang-menu"
-            anchorEl={anchorEl}
-            open={isProfileMenuOpen}
-            onClose={handleClose}
-            MenuListProps={{
-              'aria-labelledby': 'lang-button',
-            }}
-            sx={{
-              boxShadow: '0px',
-            }}
-          >
-            <MenuItem onClick={handleClose}>EN</MenuItem>
-            <MenuItem onClick={handleClose}>ES</MenuItem>
-          </StyledProfileMenu>
-        </Box>
+          <LanguageSwitch />
+        </StyledProfileWrapper>
       </StyledHeader>
     </Grid>
   );

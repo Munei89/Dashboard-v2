@@ -5,7 +5,6 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Grid from '@mui/material/Grid';
 
-import { IMenuItem } from 'utils/constants';
 import KlashaLogo from 'app/assets/svgs/KlashaLogo';
 import Button from 'app/components/Button';
 import ArrowLeft from 'app/assets/svgs/ArrowLeft';
@@ -15,50 +14,161 @@ import { useTheme } from '@mui/material/styles';
 import Header from 'app/components/Header';
 
 import { StyledDrawer, StyledMenuHeading, StyledMenuItem } from './styles';
+import { useInjectReducer } from 'utils/redux-injectors';
+import { actions, reducer, sliceKey } from 'app/pages/slice';
+import selectAppState from 'app/pages/selectors';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import PieChart from 'app/assets/svgs/PieChart';
+import Walllet from 'app/assets/svgs/Wallet';
+import Payments from 'app/assets/svgs/Payments';
+import Chart from 'app/assets/svgs/Chart';
+import Exchange from 'app/assets/svgs/Exchange';
+import Radar from 'app/assets/svgs/Radar';
+import ShoppingCart from 'app/assets/svgs/ShoppingCart';
+import PaymentLink from 'app/assets/svgs/PaymentLink';
+import Transactions from 'app/assets/svgs/Transactions';
+
+import { useTranslation } from 'react-i18next';
+import { _t } from 'utils/messages';
+import { messages } from 'app/pages/HomePage/messeges';
 
 interface Props {
   children: React.ReactNode;
   sidebarMenuItems: IMenuItem[];
+  drawerOpen: boolean;
+  onCloseDrawer?: () => void;
 }
 
-const Main = ({ children, sidebarMenuItems }: Props) => {
-  const [open, setOpen] = React.useState(false);
+interface ILinks {
+  id: number;
+  name: string;
+  url: string;
+  icon: React.ReactNode;
+}
 
-  const [isPanelHidden, setIsPanelHidden] = React.useState(false);
+interface IMenuItem {
+  id: number;
+  name: string;
+  links: ILinks[];
+}
+
+const Main = ({ children, drawerOpen }: Props) => {
+  const { t } = useTranslation();
+  const [activeLink, setActiveLink] = React.useState('');
+  useInjectReducer({ key: sliceKey, reducer: reducer });
+
+  const dispatch = useDispatch();
   const theme = useTheme();
   const isLg = useMediaQuery(theme.breakpoints.up('lg'));
+  let navigate = useNavigate();
+  let drawerWidth = 280;
 
-  let drawerWidth;
+  React.useEffect(() => {
+    setActiveLink(window.location.pathname);
+  }, []);
 
-  const handleDrawerOpen = () => {
-    setOpen(true);
+  React.useEffect(() => {
+    if (isLg) {
+      dispatch(actions.setDrawerOpen());
+    } else {
+      dispatch(actions.setDrawerClose());
+    }
+  }, [isLg, dispatch]);
+
+  const handleClick = (url: string) => {
+    navigate(url);
   };
 
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
-
-  const hidePanel = () => {
-    setIsPanelHidden(!isPanelHidden);
-  };
-  if (!isLg) {
-    drawerWidth = 107;
-  } else {
-    drawerWidth = 280;
-  }
+  const menuItems: IMenuItem[] = [
+    {
+      id: 1,
+      name: `${t(messages.mainPages())}`,
+      links: [
+        {
+          id: 1,
+          name: `${t(messages.dashboard())}`,
+          url: '/',
+          icon: <PieChart />,
+        },
+        {
+          id: 2,
+          name: `${t(messages.balances())}`,
+          url: '#',
+          icon: <Walllet />,
+        },
+        {
+          id: 3,
+          name: `${t(messages.transactions())}`,
+          url: '/transactions',
+          icon: <Payments />,
+        },
+        {
+          id: 4,
+          name: `${t(messages.analytics())}`,
+          url: '/',
+          icon: <Chart />,
+        },
+        {
+          id: 5,
+          name: `${t(messages.marketing())}`,
+          url: '/',
+          icon: <Radar />,
+        },
+        {
+          id: 6,
+          name: `${t(messages.exchangeRate())}`,
+          url: '/exchange-rates',
+          icon: <Exchange />,
+        },
+      ],
+    },
+    {
+      id: 2,
+      name: `${t(messages.acceptPayment())}`,
+      links: [
+        {
+          id: 1,
+          name: `${t(messages.klashaCheckout())}`,
+          url: '/',
+          icon: <ShoppingCart />,
+        },
+        {
+          id: 2,
+          name: `${t(messages.paymentLinks())}`,
+          url: '/',
+          icon: <PaymentLink />,
+        },
+      ],
+    },
+    {
+      id: 3,
+      name: `${t(messages.sendPayment())}`,
+      links: [
+        {
+          id: 1,
+          name: `${t(messages.klashaWire())}`,
+          url: '/',
+          icon: <Transactions />,
+        },
+      ],
+    },
+  ];
 
   return (
-    <Box sx={{ display: 'flex' }}>
+    <Box sx={{ display: 'flex', minHeight: '100vh' }}>
       <StyledDrawer
-        variant={isLg ? 'permanent' : 'temporary'}
-        $panel={isPanelHidden}
-        open={true}
+        variant="permanent"
+        open={drawerOpen}
+        $islg={isLg}
         anchor="left"
         ModalProps={{
           keepMounted: true,
         }}
         sx={{
-          width: drawerWidth,
+          width: { lg: drawerWidth },
+          flexShrink: { sm: 0 },
           backgroundColor: '#fffbf7',
         }}
       >
@@ -77,7 +187,7 @@ const Main = ({ children, sidebarMenuItems }: Props) => {
               <KlashaLogo />
             </Box>
 
-            {sidebarMenuItems.map(item => (
+            {menuItems.map(item => (
               <List key={item.id}>
                 <StyledMenuHeading>
                   <ListItemText primary={item.name} />
@@ -87,6 +197,10 @@ const Main = ({ children, sidebarMenuItems }: Props) => {
                     key={link.id}
                     disableTouchRipple
                     disableRipple
+                    $active={activeLink === link.url}
+                    onClick={() => {
+                      handleClick(link.url);
+                    }}
                   >
                     <ListItemIcon>{link.icon}</ListItemIcon>
                     <ListItemText primary={link.name} />
@@ -101,7 +215,11 @@ const Main = ({ children, sidebarMenuItems }: Props) => {
             }}
           >
             <Button
-              onClick={hidePanel}
+              onClick={() =>
+                drawerOpen
+                  ? dispatch(actions.setDrawerClose())
+                  : dispatch(actions.setDrawerOpen())
+              }
               variant="outlined"
               startIcon={<ArrowLeft />}
             >
@@ -114,7 +232,6 @@ const Main = ({ children, sidebarMenuItems }: Props) => {
         component="main"
         sx={{
           flexGrow: 1,
-          height: '100vh',
           overflow: 'auto',
         }}
       >
@@ -123,7 +240,7 @@ const Main = ({ children, sidebarMenuItems }: Props) => {
             padding: '48px 0px ',
           }}
         >
-          <Header />
+          <Header isMenuOpen={drawerOpen} />
 
           <Grid container spacing={3}>
             <Grid item xs={12}>

@@ -29,4 +29,55 @@ export const StyledTableActions = styled(Box)`
   justify-content: space-between;
   padding: 16px;
   border-bottom: 1px solid #f0f0f0;
+  @media (max-width: 640px) {
+    flex-direction: column;
+
+    .MuiFormControl-root {
+      width: 100%;
+      margin-bottom: 16px;
+    }
+  }
+`;
+
+export const StyledTableFooter = styled(Box)`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  padding: 16px;
+  border-top: 1px solid #f0f0f0;
+
+  @media (max-width: 1280px) {
+    flex-direction: column;
+  }
+`;
+
+export const StyledPagination = styled(Box)`
+  border: 1px solid #f0f0f0;
+  border-radius: 5px;
+  padding: 8px;
+  @media (max-width: 1280px) {
+    display: flex;
+    justify-content: center;
+  }
+
+  .MuiPaginationItem-text {
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 22px;
+    /* or 160% */
+
+    text-align: center;
+
+    color: #8f8f8f;
+    &.Mui-selected {
+      color: #000000;
+    }
+  }
+`;
+
+export const StyledButtonWrapper = styled(Box)`
+  @media (max-width: 640px) {
+    display: flex;
+    justify-content: space-between;
+  }
 `;
