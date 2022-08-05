@@ -183,6 +183,9 @@ const Main = ({ children, drawerOpen }: Props) => {
               sx={{
                 paddingBottom: '34px',
               }}
+              onClick={() => {
+                navigate('/');
+              }}
             >
               <KlashaLogo />
             </Box>
