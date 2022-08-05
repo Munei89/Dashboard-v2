@@ -12,6 +12,14 @@ export const GlobalStyle = createGlobalStyle`
        font-style: normal;
 }
 
+    @font-face {
+    font-family: 'Inter Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Inter Regular'), url('fonts/Inter-Regular.woff') format('woff');
+    }
+    
+
 
 
 

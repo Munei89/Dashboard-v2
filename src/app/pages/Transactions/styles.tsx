@@ -1,7 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const StyledCardHeading = styled.h4`
-  font-family: 'Inter', sans-serif;
+  Inter Regular sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -13,7 +13,7 @@ export const StyledCardHeading = styled.h4`
 `;
 
 export const StyledCardHeadingWhite = styled.h4`
-  font-family: 'Inter', sans-serif;
+  Inter Regular sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;

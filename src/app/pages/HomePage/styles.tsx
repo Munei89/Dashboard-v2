@@ -1,7 +1,8 @@
 import styled from 'styled-components/macro';
+import { Grid } from '@mui/material';
 
 export const StyledCardHeading = styled.h4`
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter Regular', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -13,7 +14,7 @@ export const StyledCardHeading = styled.h4`
 `;
 
 export const StyledCardHeadingWhite = styled.h4`
-  font-family: 'Inter', sans-serif;
+  font-family: 'Inter Regular', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -64,15 +65,17 @@ export const StyledGraphHeading = styled.h3`
   letter-spacing: -0.02em;
   color: #000000;
   margin: 0;
+  margin-right: 16px;
 `;
 
 export const StyledGraphIndicators = styled.div`
-  font-family: 'Inter';
+  font-family: 'GeneralSans-Extralight', Helvetica, Arial, sans-serif;
   font-style: normal;
   font-weight: 600;
   font-size: 14px;
   line-height: 22px;
   color: #ef2c5a;
+  margin: 0 16px;
 `;
 
 export const StyledCardText = styled.p`
@@ -89,4 +92,12 @@ export const StyledCardText = styled.p`
   /* base/white */
   margin: 0;
   color: #ffffff;
+  width: 70%;
+`;
+
+export const StyledSaleGridHeader = styled(Grid)`
+  &.MuiGrid-root.MuiGrid-item {
+    padding-left: 0px;
+    padding-right: 32px;
+  }
 `;

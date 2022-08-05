@@ -15,12 +15,14 @@ import {
   StyledGraphHeading,
   StyledGraphIndicators,
   StyledCardText,
+  StyledSaleGridHeader,
 } from './styles';
 import GraphLite from 'app/assets/svgs/GraphLite';
 import { Chart } from 'app/components/Chart/Loadable';
 import Button from 'app/components/Button';
 import ArrowDown from 'app/assets/svgs/ArrowDown';
 import ArrowDownAlt from 'app/assets/svgs/ArrowDownAlt';
+import Lines from 'app/assets/images/lines.png';
 
 export function HomePage() {
   const currency = '₦';
@@ -93,35 +95,47 @@ export function HomePage() {
         </ContentRow>
         <ContentRow
           contentHeader={
-            <Box
+            <Grid
+              container
+              spacing={4}
               sx={{
                 display: 'flex',
                 margin: '16px 0',
-                justifyContent: 'space-between',
               }}
             >
-              <Box
+              <StyledSaleGridHeader
+                item
+                xs={8}
+                lg={8}
                 sx={{
                   display: 'flex',
+                  justifyContent: 'space-between',
                 }}
               >
-                <StyledGraphHeading>Sales</StyledGraphHeading>
-                <StyledGraphIndicators> 7 Days</StyledGraphIndicators>
-                <StyledGraphIndicators>30 Days</StyledGraphIndicators>
-                <Button
-                  variant="outlined"
-                  endIcon={<ArrowDown />}
-                  sx={{ margin: '0 16px' }}
+                <Box
+                  sx={{
+                    display: 'flex',
+                    alignItems: 'baseline',
+                  }}
                 >
-                  USD
-                </Button>
-              </Box>
-              <Box>
-                <Button variant="outlined" startIcon={<ArrowDownAlt />}>
-                  Download report
-                </Button>
-              </Box>
-            </Box>
+                  <StyledGraphHeading>Sales</StyledGraphHeading>
+                  <StyledGraphIndicators> 7 Days</StyledGraphIndicators>
+                  <StyledGraphIndicators>30 Days</StyledGraphIndicators>
+                  <Button
+                    variant="outlined"
+                    endIcon={<ArrowDown />}
+                    sx={{ margin: '0 16px' }}
+                  >
+                    USD
+                  </Button>
+                </Box>
+                <Box>
+                  <Button variant="outlined" startIcon={<ArrowDownAlt />}>
+                    Download report
+                  </Button>
+                </Box>
+              </StyledSaleGridHeader>
+            </Grid>
           }
         >
           <Grid container spacing={4}>
@@ -144,14 +158,17 @@ export function HomePage() {
                   display: 'flex',
                   flexDirection: 'column',
                   justifyContent: 'space-between',
+                  backgroundImage: `url(${Lines})`,
                 }}
               >
                 <StyledCardText>
                   KlashaWire - send money to businesses globally from Africa
                 </StyledCardText>
-                <Button size="xs" variant="contained">
-                  Send a wire
-                </Button>
+                <Box>
+                  <Button size="xs" variant="contained">
+                    Send a wire
+                  </Button>
+                </Box>
               </StyledCard>
             </Grid>
           </Grid>
