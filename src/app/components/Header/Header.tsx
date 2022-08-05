@@ -31,7 +31,7 @@ const Header = ({ isMenuOpen }: Props) => {
   const day = moment().format('LL');
 
   return (
-    <Grid container spacing={1} sx={{ marginBottom: '80px' }}>
+    <Grid container spacing={1} sx={{ marginBottom: ['40px', '40px', '80px'] }}>
       <StyledHeader
         sx={{
           display: 'flex',
